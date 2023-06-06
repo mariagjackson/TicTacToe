@@ -1,0 +1,113 @@
+
+// File Name:	TicTac
+// Programmer:	Maria Jackson & Course Instructor
+// Date:        19/04/2023
+// Description:	This program demonstrates the basic game design utilizingD Arrays to create  
+//              2D Arrays and GUI to create a TicTacToe game 
+
+
+// Majority of the following code/comments are pre-written by the course 
+// instructor. My original code will be notated/labelled accordingly!
+
+
+// Package, Class, Import, and Memory Requirements
+import java.awt.*; 
+import javax.swing.*; 
+
+
+// Sets up our TicTac class; gets access to everything in the JFrame class
+public class TicTac extends JFrame { 
+    
+    // Ioins the two programs (TicTac.java and TicTacEvent.java) to work 
+    // with each other
+    TicTacEvent tictac = new TicTacEvent(this); 
+
+    // Creates new frame
+    JPanel row1 = new JPanel();  //creates a new frame
+    
+    // Creates a 2D gride of arrays for the 9 buttons
+    // Sets aside memory spots for them, but hasn't created them yet
+    JButton[][] boxes = new JButton[3][3]; 
+
+    // Will pop-up and declare the winner
+    JOptionPane win = new JOptionPane("Winner!"); 
+    
+    // Loads the image to be used as the backgroud of the buttons;
+    // I put a new images in, to make the game gold and marble themed!
+    ImageIcon back = new ImageIcon("cardback.jpg"); 
+    
+    
+    // Creates the method that draws the game board
+    public TicTac() {  
+        
+        // Creates the title for the App
+        super ("Tic Tac Toe");  
+        
+        // Sets the size of the outer frame
+        setSize (600,650);  
+        
+        // Sets the program to quit if the window is close
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+        
+        // Arranges components from left to right, centering components 
+        // horizontally with a five pixel gap between them
+        FlowLayout layout = new FlowLayout(); 
+        setLayout(layout); 
+        
+        // Creates a variable to keep track of the box number
+        int name = 0;  
+        String newname;
+
+        // Arranges the components in a rectangular grid, where all cells are 
+        // of equal size
+        GridLayout layout1 = new GridLayout(4, 3, 10, 10); 
+        row1.setLayout(layout1);
+        
+        // Creates and adds the buttons to the GridLayout, goes up and down
+        for (int x=0; x<=2; x++){  
+            
+            // Goes across on the GridLayout
+            for (int y=0; y<=2; y++){  
+                
+                // Adds one to the loop
+                name = name + 1; 
+                
+                // Names newname from number 1-9
+                newname = Integer.toString(name);  
+                
+                // Sets the boxes to show number 1-9
+                boxes[x][y] = new JButton(newname);  
+                
+                // Sets the images of the back of the buttons 
+                boxes[x][y].setIcon(back);  
+                
+                // Adds remaining components to the GridLayout.
+                row1.add(boxes[x][y]);  
+            }
+        }
+        
+        // Adds the GridLayout to the FlowLayout
+        add (row1); 
+
+        // Runs a loop to see which button was pressed
+        for (int x=0; x<=2; x++){  
+            for (int y=0; y<=2; y++){
+                
+                // Listens to button being clicked
+                boxes[x][y].addActionListener(tictac);  
+            }
+        }
+
+        // Shows the FlowLayout on the screen
+        setVisible(true);  
+    }
+
+    
+    // This is the main method in the program and invokes all the other methods 
+    // required by your program
+    public static void main(String[] arguments){  
+        
+        // Runs the screen layout class
+        TicTac frame = new TicTac();  
+    }
+} // End of code
