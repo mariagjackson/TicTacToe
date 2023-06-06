@@ -1,0 +1,407 @@
+
+// File Name:	TicTacEvent
+// Programmer:	Maria Jackson & Course Instructor
+// Date:        19/04/2023
+// Description:	This program demonstrates the basic game design utilizing 
+//              2D Arrays and GUI to create a TicTacToe game 
+
+
+// Majority of the following code/comments are pre-written by the course 
+// instructor. My original code will be notated/labelled accordingly!
+
+
+// Package, Class, Import, and Memory Requirements
+import javax.swing.*; 
+import java.awt.event.*;
+import java.awt.*;
+
+
+// Creates a class that responds to mouse and keyboard input by “listening.”
+public class TicTacEvent implements ItemListener, ActionListener, Runnable { 
+    
+    
+    // MY NEW VARIABLES TO TRACK WINS
+    int xWins = 0;
+    int oWins = 0;
+    int ties = 0;
+    
+    
+    // MY NEW METHOD TO RESET THE BOARD
+    public void resetBoard(){
+        
+        // Simple double for loop to iterate through each row/column
+        for (int row=0; row<=2; row++){  
+           for (int col=0; col<=2; col++){
+               
+               // Turn the buttons back on so they can be clicked again
+               gui.boxes[row][col].setEnabled(true); 
+               
+                // Set the image of all boxes back to the cardback
+                gui.boxes[row][col].setIcon(back);
+                
+                // Reset the game variables
+                win = 0;
+                clicks = 0;
+                
+                // Reset the board integers
+                check = new int[3][3]; 
+                
+           }
+        }
+    }
+    
+ 
+    // Associates the game board with the event
+    TicTac gui; 
+  
+    // Sets x.jpg to imageicon a, make sure the images are less than 100x100 
+    // pixels in size
+    ImageIcon a = new ImageIcon("x.jpg"); 
+    
+    // Sets 0.jpg to imageicon b
+    ImageIcon b = new ImageIcon("o.jpg"); 
+    
+    // Loads the image to be used as the backgroud of the buttons
+    ImageIcon back = new ImageIcon("cardback.jpg"); 
+    
+    // Checks the number of turns
+    int clicks = 0;  
+    
+    // Created to check for a winner 
+    int win = 0;   
+    
+    // 2D array to check the value in each box 
+    int[][] check = new int[3][3];  
+
+    // Associates the two files to be used together.
+    public TicTacEvent (TicTac in){ 
+        gui = in;
+        
+        // Initiates the winner check array.
+        for (int row=0; row<=2; row++){  
+           for (int col=0; col<=2; col++){
+               check[row][col]=0;
+           }
+       }
+    }
+    
+    
+    // Tells the program what to do when a button is clicked
+    public void actionPerformed (ActionEvent event) {  
+        
+       // Takes the button name as input from the button that is clicked
+       String command = event.getActionCommand();  
+
+       // If the button labelled 1 is pressed
+       if (command.equals("1")) {  
+           // Run the b1() method code below
+           b1();                    
+       }
+       if (command.equals("2")) {
+           b2();
+       }
+       if (command.equals("3")) {
+           b3();
+       }
+       if (command.equals("4")) {
+           b4();
+       }
+       if (command.equals("5")) {
+           b5();
+       }
+       if (command.equals("6")) {
+           b6();
+       }
+       if (command.equals("7")) {
+           b7();
+       }
+       if (command.equals("8")) {
+           b8();
+       }
+       if (command.equals("9")) {
+           b9();
+       }
+    }
+    
+
+// Methods for buttons b1 to b9 to handle clicks on each game square
+
+void b1() {  
+    
+        // Keeps track of the number of boxes chosen 
+        clicks = clicks + 1;  
+        if ((clicks%2)==1){
+            
+            // If box in array position [0][0] top left corner is pressed
+            check[0][0] = 1; 
+            
+            // Disable the box, so it can't be pressed again
+            gui.boxes[0][0].setEnabled(false); 
+            
+            // Set the image of the disabled box to a(X.jpg)
+            gui.boxes[0][0].setDisabledIcon(a); 
+            
+        // Puts an O on the board and declares that square to be taken
+        } else {         
+            check[0][0] = 2;
+            gui.boxes[0][0].setEnabled(false); 
+            gui.boxes[0][0].setDisabledIcon(b);
+        }
+        winner();
+
+        
+    }
+    void b2() {
+        clicks = clicks + 1;
+        if ((clicks%2)==1){
+            check[0][1] = 1;
+            gui.boxes[0][1].setEnabled(false); 
+            gui.boxes[0][1].setDisabledIcon(a);
+        } else {
+            check[0][1] = 2;
+            gui.boxes[0][1].setEnabled(false); 
+            gui.boxes[0][1].setDisabledIcon(b);
+        }
+        winner();
+        
+        
+    }
+    void b3() {
+        clicks = clicks + 1;
+        if ((clicks%2)==1){
+            check[0][2] = 1;
+            gui.boxes[0][2].setEnabled(false); 
+            gui.boxes[0][2].setDisabledIcon(a);
+        } else {
+            check[0][2] = 2;
+            gui.boxes[0][2].setEnabled(false); 
+            gui.boxes[0][2].setDisabledIcon(b);
+        }
+        winner();
+        
+        
+    }
+    void b4() {
+        clicks = clicks + 1;
+        if ((clicks%2)==1){
+            check[1][0] = 1;
+            gui.boxes[1][0].setEnabled(false); 
+            gui.boxes[1][0].setDisabledIcon(a);
+        } else {
+            check[1][0] = 2;
+            gui.boxes[1][0].setEnabled(false); 
+            gui.boxes[1][0].setDisabledIcon(b);
+        }
+        winner();
+        
+        
+    }
+    void b5() {
+        clicks = clicks + 1;
+        if ((clicks%2)==1){
+            check[1][1] = 1;
+            gui.boxes[1][1].setEnabled(false); 
+            gui.boxes[1][1].setDisabledIcon(a);
+        } else {
+            check[1][1] = 2;
+            gui.boxes[1][1].setEnabled(false); 
+            gui.boxes[1][1].setDisabledIcon(b);
+        }
+        winner();
+        
+        
+    }
+    void b6() {
+        clicks = clicks + 1;
+        if ((clicks%2)==1){
+            check[1][2] = 1;
+            gui.boxes[1][2].setEnabled(false); 
+            gui.boxes[1][2].setDisabledIcon(a);
+        } else {
+            check[1][2] = 2;
+            gui.boxes[1][2].setEnabled(false); 
+            gui.boxes[1][2].setDisabledIcon(b);
+        }
+        winner();
+        
+        
+    }
+    void b7() {
+        clicks = clicks + 1;
+        if ((clicks%2)==1){
+            check[2][0] = 1;
+            gui.boxes[2][0].setEnabled(false); 
+            gui.boxes[2][0].setDisabledIcon(a);
+        } else {
+            check[2][0] = 2;
+            gui.boxes[2][0].setEnabled(false); 
+            gui.boxes[2][0].setDisabledIcon(b);
+        }
+        winner();
+        
+        
+    }
+    void b8() {
+        clicks = clicks + 1;
+        if ((clicks%2)==1){
+            check[2][1] = 1;
+            gui.boxes[2][1].setEnabled(false); 
+            gui.boxes[2][1].setDisabledIcon(a);
+        } else {
+            check[2][1] = 2;
+            gui.boxes[2][1].setEnabled(false); 
+            gui.boxes[2][1].setDisabledIcon(b);
+        }
+        winner();
+        
+        
+    }
+    void b9() {
+        clicks = clicks + 1;
+        if ((clicks%2)==1){
+            check[2][2] = 1;
+            gui.boxes[2][2].setEnabled(false); 
+            gui.boxes[2][2].setDisabledIcon(a);
+        } else {
+            check[2][2] = 2;
+            gui.boxes[2][2].setEnabled(false); 
+            gui.boxes[2][2].setDisabledIcon(b);
+        }
+        winner();
+    }
+    
+
+    // MY PLAY AGAIN CODE FOR WIN CHECKS: all the exact same for each, with
+    // only difference being winner names. Thats why I only documented
+    // first block for row winners. 
+    
+    // Win checks
+    void winner() {
+        
+        // Checks each row for winner
+        for (int x=0; x<=2; x++){  
+            
+            // Checks to see if all entries are X, or all entries are O.
+            if ((check[x][0]==check[x][1])&&(check[x][0]==check[x][2])) { 
+                
+                // If all X
+                if (check[x][0]==1) {  
+                    
+                    // Creates a pop up box declaring a winner
+                    // Adds 1 to xWins variable to keep track of X wins
+                    xWins ++;
+                    win = 1;
+                    
+                    // MY NEW CODE OF THE PLAY AGAIN FEATURE 
+                    // Pop-up announces winner, how many times they've won,
+                    // and asks user to play again
+                    int result = JOptionPane.showConfirmDialog(null, "Congrats X, you have won the game! You have now won a total of " + xWins + " game(s). Play again?", "X Wins!", JOptionPane.YES_NO_OPTION);
+                    
+                    // If user clicks yes, the resetBoard() method is called
+                    // and the board/game restarts
+                    if (result == JOptionPane.YES_OPTION) {
+                        resetBoard();
+                    
+                    // If the user clicks no, the game ends/exits
+                    } else {
+                        System.exit(0);
+                    }
+                  
+                // If all O
+                } else if (check[x][0]==2){  
+                    oWins ++;
+                    win = 1;
+                    int result = JOptionPane.showConfirmDialog(null, "Congrats O, you have won the game! You have now won a total of " + oWins + " game(s). Play again?", "O Wins!", JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.YES_OPTION) {
+                        resetBoard();
+                    } else {
+                        System.exit(0);  
+                }
+            }
+        }
+    }
+        
+        // Checks all columns for winner
+        for (int x=0; x<=2; x++){ 
+            
+            // Checks to see if all entries are X, or all entries are O
+            if ((check[0][x]==check[1][x])&&(check[0][x]==check[2][x])) {  
+                
+                // If all X
+                if (check[0][x]==1) {
+                    xWins ++;
+                    win = 1;
+                    int result = JOptionPane.showConfirmDialog(null, "Congrats X, you have won the game! You have now won a total of" + xWins + " game(s). Play again?", "X Wins!", JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.YES_OPTION) {
+                        resetBoard();
+                    } else {
+                        System.exit(0); 
+                    }
+                
+                // If all O
+                } else if (check[0][x]==2) {
+                    oWins ++;
+                    win = 1;
+                    int result = JOptionPane.showConfirmDialog(null, "Congrats O, you have won the game! You have now won a total of " + oWins + " game(s). Play again?", "O Wins!", JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.YES_OPTION) {
+                        resetBoard();
+                    } else {
+                        System.exit(0);  
+                }
+            }
+        }
+    }
+        
+        // Checks all diagonals for winner
+        if (((check[0][0]==check[1][1])&&(check[0][0]==check[2][2]))||
+                ((check[2][0]==check[1][1])&&(check[1][1]==check[0][2]))){  
+            
+            // Checks for X winner
+            if (check[1][1]==1) {  
+                xWins ++;
+                win = 1;
+                int result = JOptionPane.showConfirmDialog(null, "Congrats X, you have won the game! You have now won a total of " + xWins + " game(s). Play again?", "X Wins!", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    resetBoard();
+                } else {
+                    System.exit(0);  
+                }
+                
+            // Checks for O winner
+            } else if (check[1][1]==2) { 
+                int result = JOptionPane.showConfirmDialog(null, "Congrats O, you have won the game! You have now won a total of " + oWins + " game(s). Play again?", "O Wins!", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    resetBoard();
+                } else {
+                    System.exit(0);  
+            }
+        }
+    }
+
+        
+        // Checks for a tie game
+        // This structure checks to see if nine boxes have been chosen (clicked) 
+        // and that a winner has not been declared (win == 0).
+        if ((clicks==9) && (win==0)) {  
+            ties ++;
+            int result = JOptionPane.showConfirmDialog(null, "The game is a tie! There have been a total of " + ties + " tie game(s). Play again?", "Tie Game", JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION) {
+                resetBoard();
+            } else {
+            // Exit the game
+            System.exit(0);
+        }
+      }
+    }
+       
+
+    public void itemStateChanged(ItemEvent e) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
+} // End of code
